@@ -1,0 +1,23 @@
+<nav>
+    <% if(isAuth) { %>
+        <ul class="menu">
+
+            <li><a href="" onclick="logout()">Logout</a></li>
+            <li><a href="/addblog">Add blog</a></li>
+            <li><a href="/userblogs">User:
+                    <%= token.email %>
+                </a></li>
+        </ul>
+        <% } else { %>
+            <ul class="menu">
+                <li> <a href="/login">Login</a></li>
+                <li> <a href="/Register">Register</a></li>
+            </ul>
+            <% } %>
+</nav>
+<script>
+    const logout = () => {
+        document.cookie = "token=; Max-Age=0";
+        window.location.replace("/");
+    };
+</script>
