@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('partials/head') %>
+</head>
+
+<body>
+
+    <header class="header">
+        <div>
+            <h3 class="header__logo">Blogs for You! </h3>
+            <a href="/"> <img class="img"
+                    src="https://logoeps.com/wp-content/uploads/2014/04/49585-blogger-logotype-icon-vector-icon-vector-eps.png"
+                    alt=""> </a>
+        </div>
+        <div>
+            <%- include('partials/nav') %>
+        </div>
+    </header>
+    <div class="wrapper">
+        <div>
+            <%- include('partials/sortby') %>
+        </div>
+        <div class="barsDiv">
+            <% data.map(blog=> { %>
+                <div class="blog__card">
+                    <h2>
+                        <%- blog.title %>
+                    </h2>
+                    <p>
+                        <%- blog.content %>
+                    </p>
+                    <p>
+                        Blog id: <%- blog.id %>
+                    </p>
+                    <p>
+                        Author id: <%- blog.author_id %>
+                    </p>
+                    </a>
+                    <% if(isAuth) { %>
+                        <button class="delBtn" onclick="del('<%= blog.id%>')">Delete</button>
+                        <% } %>
+                </div>
+                <% }) %>
+        </div>
+    </div>
+</body>
+<script>
+    const del = (id) => {
+        fetch(`/${id}`, { method: 'DELETE' })
+            .then(window.location.replace('/'))
+    };
+</script>
+
+</html>
